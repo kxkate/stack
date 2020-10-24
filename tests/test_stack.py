@@ -1,6 +1,6 @@
 ### BIBLIOTEKA UNITTEST #####
 from unittest import TestCase
-from stack import Stack
+from stack import Stack, EmptyStackError
 
 
 class TestStackOperations(TestCase):
@@ -53,4 +53,5 @@ class TestStackOperations(TestCase):
 
     def test_should_raise_when_called_pop_on_empty_stack(self):
           # robimy zaślepkę. Test, który od razu failuje
-        self.fail("Not implemented yet")  # test przy uruchomieniu padnie
+        # self.fail("Not implemented yet")  # test przy uruchomieniu padnie
+        self.assertRaises(EmptyStackError, self.stack.pop)
