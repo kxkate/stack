@@ -1,5 +1,11 @@
 class EmptyStackError(Exception):
     pass
+
+
+class NotEnoughElements(Exception):
+    pass
+
+
 class Stack:
     def __init__(self):
         self._data = []
@@ -13,6 +19,14 @@ class Stack:
 
     def peek(self):
         return self._data[-1]
+
+    def multi_pop(self, n):
+        if len(self._data) < n:
+            raise NotEnoughElements
+        return [self.pop() for _ in range(n)]
+
+        #zwraca liste n ostatnich elementow ze stacku
+        #jesli elementow mniej niz n, to wyjątek ("Not enough elements to return"
 
     def pop(self):
         if not self._data:

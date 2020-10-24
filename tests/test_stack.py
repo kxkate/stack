@@ -1,6 +1,6 @@
 ### BIBLIOTEKA UNITTEST #####
 from unittest import TestCase
-from stack import Stack, EmptyStackError
+from stack import Stack, EmptyStackError, NotEnoughElements
 
 
 class TestStackOperations(TestCase):
@@ -55,3 +55,17 @@ class TestStackOperations(TestCase):
           # robimy zaślepkę. Test, który od razu failuje
         # self.fail("Not implemented yet")  # test przy uruchomieniu padnie
         self.assertRaises(EmptyStackError, self.stack.pop)
+
+    def test_multipop_raises_if_numb_of_elements_is_less_than_in_stack(self):
+        self.assertRaises(NotEnoughElements, self.stack.multi_pop, 2)
+        #multipop rzuca wyjatek, gdy dlugosc stacku jest mniejsza niz n, funkcja multipop z parametrem 2
+
+
+    def test_multipop_should_return_two_elements(self):
+        expected = [9, 8, 7, 6]
+        for elem in range(10):
+            self.stack.push(elem)
+
+        result = self.stack.multi_pop(4)
+
+        self.assertEqual(result, expected)
